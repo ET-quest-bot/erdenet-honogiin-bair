@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="mn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Эрдэнэт Хоногийн Байр Түрээс</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#f4f7f3;color:#203328}
+header{background:#fff;padding:18px 5%;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;border-bottom:1px solid #dce5dc}
+.brand{font-weight:bold;color:#176b4a;font-size:18px}
+a{color:inherit;text-decoration:none}
+.btn{display:inline-block;padding:12px 18px;border-radius:9px;background:#176b4a;color:white;border:0;cursor:pointer;font-weight:bold}
+.hero{padding:55px 5%;background:linear-gradient(120deg,#e1eddf,#f8f4e8);display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:center}
+h1{font-size:clamp(32px,5vw,52px);line-height:1.1;margin:12px 0}
+p{line-height:1.7}
+.heroart{min-height:260px;border-radius:20px;background:linear-gradient(#c7dfd1,#739b7d);display:grid;place-items:center;font-size:90px}
+section{padding:40px 5%}
+h2{font-size:30px}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.card{background:white;border:1px solid #dce5dc;border-radius:15px;overflow:hidden}
+.room{height:130px;background:#dce9dd;display:grid;place-items:center;font-size:55px}
+.cardbody{padding:18px}
+.price{font-weight:bold;color:#176b4a}
+.booking{background:#14543b;color:white}
+form{background:white;color:#203328;border-radius:16px;padding:22px;max-width:700px}
+.fields{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+label{display:block;font-weight:bold;font-size:13px;margin-bottom:6px}
+input,select,textarea{width:100%;padding:12px;border:1px solid #ccd8ce;border-radius:8px;font:inherit}
+textarea{min-height:75px}
+.full{grid-column:1/-1}
+form button{margin-top:16px;width:100%}
+.notice{font-size:13px;color:#637267}
+footer{padding:25px 5%;background:#fff;color:#647268}
+@media(max-width:700px){.hero{grid-template-columns:1fr;padding-top:35px}.cards{grid-template-columns:1fr}.fields{grid-template-columns:1fr}.full{grid-column:auto}.heroart{min-height:190px}}
+</style>
+</head>
+<body>
+<header><div class="brand">⌂ Эрдэнэт Хоногийн Байр Түрээс</div><a class="btn" href="#booking">Захиалга өгөх</a></header>
+<main>
+<section class="hero"><div><p>ЭРДЭНЭТ ХОТ · ХОНОГИЙН ТҮРЭЭС</p><h1>Эрдэнэтэд тухтай байрлах таны сонголт.</h1><p>Аялал, ажил хэрэг, гэр бүлийн айлчлалд тохирсон хоногийн байр. Байраа сонгон, хүссэн өдрөө захиалгын хүсэлтээ илгээгээрэй.</p><a class="btn" href="#rooms">Байрнууд үзэх →</a></div><div class="heroart">⌂ 🏡</div></section>
+<section id="rooms"><h2>Байрны сонголт</h2><p>Үнэ болон бодит зураг удахгүй нэмэгдэнэ.</p><div class="cards">
+<article class="card"><div class="room">⌂</div><div class="cardbody"><h3>1 өрөө байр</h3><p>Ганцаараа эсвэл хосоороо тухтай байрлахад тохиромжтой.</p><p class="price">Үнийг лавлах</p><a class="btn choose" href="#booking" data-room="1 өрөө байр">Сонгох</a></div></article>
+<article class="card"><div class="room">🏠</div><div class="cardbody"><h3>2 өрөө байр</h3><p>Гэр бүл, найз нөхөд болон ажлын томилолтод тохиромжтой.</p><p class="price">Үнийг лавлах</p><a class="btn choose" href="#booking" data-room="2 өрөө байр">Сонгох</a></div></article>
+<article class="card"><div class="room">🏡</div><div class="cardbody"><h3>Бусад сонголт</h3><p>Таны хэрэгцээнд тохирох байр байгаа эсэхийг лавлаарай.</p><p class="price">Үнийг лавлах</p><a class="btn choose" href="#booking" data-room="Бусад сонголт">Сонгох</a></div></article>
+</div></section>
+<section class="booking" id="booking"><h2>Захиалгын хүсэлт</h2><p>Мэдээллээ бөглөөд хүсэлтийн хураангуй гаргана.</p><form id="bookingForm"><div class="fields">
+<div><label for="roomType">Байрны төрөл</label><select id="roomType" required><option value="">Сонгох</option><option>1 өрөө байр</option><option>2 өрөө байр</option><option>Бусад сонголт</option></select></div>
+<div><label for="guests">Хүний тоо</label><select id="guests"><option>1</option><option selected>2</option><option>3</option><option>4</option><option>5 ба түүнээс дээш</option></select></div>
+<div><label for="arrival">Ирэх өдөр</label><input id="arrival" type="date" required></div>
+<div><label for="departure">Гарах өдөр</label><input id="departure" type="date" required></div>
+<div class="full"><label for="phone">Утасны дугаар</label><input id="phone" type="tel" placeholder="Утасны дугаараа оруулна уу" required></div>
+<div class="full"><label for="note">Нэмэлт хүсэлт</label><textarea id="note" placeholder="Ирэх цаг, бусад хүсэлт"></textarea></div>
+</div><button class="btn" type="submit">Хүсэлтийн хураангуй гаргах</button><p class="notice">Энэ эхний хувилбар хүсэлтийн хураангуй үүсгэнэ. Захиалгыг эзэн рүү илгээх холболт дараа нь хийгдэнэ.</p></form></section>
+<section><h2>Байршил ба холбоо барих</h2><p>📍 Эрдэнэт хот, Орхон аймаг — нарийвчилсан хаяг нэмэгдэнэ.</p><p>☎ Утасны дугаар болон Facebook Page-ийн холбоос нэмэгдэнэ.</p></section>
+</main>
+<footer>© Эрдэнэт Хоногийн Байр Түрээс · Эрдэнэт хот</footer>
+<script>
+const $=id=>document.getElementById(id);
+const today=new Date();
+const dateStr=d=>{const x=new Date(d.getTime()-d.getTimezoneOffset()*60000);return x.toISOString().slice(0,10)};
+$('arrival').min=dateStr(today);$('departure').min=dateStr(today);
+$('arrival').addEventListener('change',()=>{$('departure').min=$('arrival').value;if($('departure').value<=$('arrival').value)$('departure').value=''});
+document.querySelectorAll('[data-room]').forEach(a=>a.addEventListener('click',()=>{$('roomType').value=a.dataset.room}));
+$('bookingForm').addEventListener('submit',e=>{e.preventDefault();const a=new Date($('arrival').value+'T12:00:00');const d=new Date($('departure').value+'T12:00:00');if(d<=a){alert('Гарах өдөр ирэх өдрөөс хойш байх ёстой.');return}const nights=Math.round((d-a)/86400000);const msg='Эрдэнэт Хоногийн Байр Түрээс — захиалгын хүсэлт\nБайр: '+$('roomType').value+'\nХүний тоо: '+$('guests').value+'\nИрэх: '+$('arrival').value+'\nГарах: '+$('departure').value+'\nХоног: '+nights+'\nУтас: '+$('phone').value+'\nНэмэлт хүсэлт: '+($('note').value||'Байхгүй')+'\n\nБайр сул эсэх, үнэ болон захиалгыг эзэнтэй холбогдон баталгаажуулна.';if(confirm(msg+'\n\nХураангуйг хуулж авах уу?')){if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(msg).then(()=>alert('Хураангуй хуулагдлаа.')).catch(()=>prompt('Хураангуйг гараар хуулна уу:',msg));else prompt('Хураангуйг гараар хуулна уу:',msg)}});
+</script>
+</body>
+</html>
