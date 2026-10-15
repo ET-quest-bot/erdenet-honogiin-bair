@@ -1,68 +1,875 @@
-<!doctype html>
+
+<!DOCTYPE html>
 <html lang="mn">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Эрдэнэт Хоногийн Байр Түрээс</title>
-<style>
-*{box-sizing:border-box}
-body{margin:0;font-family:Arial,sans-serif;background:#f4f7f3;color:#203328}
-header{background:#fff;padding:18px 5%;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;border-bottom:1px solid #dce5dc}
-.brand{font-weight:bold;color:#176b4a;font-size:18px}
-a{color:inherit;text-decoration:none}
-.btn{display:inline-block;padding:12px 18px;border-radius:9px;background:#176b4a;color:white;border:0;cursor:pointer;font-weight:bold}
-.hero{padding:55px 5%;background:linear-gradient(120deg,#e1eddf,#f8f4e8);display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:center}
-h1{font-size:clamp(32px,5vw,52px);line-height:1.1;margin:12px 0}
-p{line-height:1.7}
-.heroart{min-height:260px;border-radius:20px;background:linear-gradient(#c7dfd1,#739b7d);display:grid;place-items:center;font-size:90px}
-section{padding:40px 5%}
-h2{font-size:30px}
-.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-.card{background:white;border:1px solid #dce5dc;border-radius:15px;overflow:hidden}
-.room{height:130px;background:#dce9dd;display:grid;place-items:center;font-size:55px}
-.cardbody{padding:18px}
-.price{font-weight:bold;color:#176b4a}
-.booking{background:#14543b;color:white}
-form{background:white;color:#203328;border-radius:16px;padding:22px;max-width:700px}
-.fields{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-label{display:block;font-weight:bold;font-size:13px;margin-bottom:6px}
-input,select,textarea{width:100%;padding:12px;border:1px solid #ccd8ce;border-radius:8px;font:inherit}
-textarea{min-height:75px}
-.full{grid-column:1/-1}
-form button{margin-top:16px;width:100%}
-.notice{font-size:13px;color:#637267}
-footer{padding:25px 5%;background:#fff;color:#647268}
-@media(max-width:700px){.hero{grid-template-columns:1fr;padding-top:35px}.cards{grid-template-columns:1fr}.fields{grid-template-columns:1fr}.full{grid-column:auto}.heroart{min-height:190px}}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Эрдэнэт хотын хоногийн байр түрээс. 1 өрөө 120,000₮, 2 өрөө 150,000₮.">
+  <title>Эрдэнэт Хоногийн Байр Түрээс</title>
+
+  <style>
+    :root {
+      --green: #176b4a;
+      --dark-green: #0f5138;
+      --gold: #e6b95f;
+      --bg: #f3f6f1;
+      --white: #fff;
+      --text: #17251f;
+      --muted: #65736b;
+      --border: #dce5dc;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: Arial, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .wrap {
+      width: min(1100px, calc(100% - 32px));
+      margin: auto;
+    }
+
+    header {
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 5;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 14px 0;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+    }
+
+    .logo {
+      display: grid;
+      place-items: center;
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      background: var(--green);
+      color: white;
+      font-size: 25px;
+    }
+
+    .navlinks {
+      display: flex;
+      gap: 20px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .btn {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      padding: 12px 17px;
+      border: 0;
+      border-radius: 10px;
+      font-weight: 700;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .primary {
+      background: var(--green);
+      color: white;
+    }
+
+    .primary:hover { background: var(--dark-green); }
+
+    .secondary {
+      background: white;
+      border: 1px solid var(--border);
+      color: var(--text);
+    }
+
+    .hero { padding: 48px 0 35px; }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 30px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      color: var(--green);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 1px;
+    }
+
+    h1 {
+      font-size: clamp(34px, 5vw, 55px);
+      line-height: 1.1;
+      margin: 14px 0;
+    }
+
+    h2 { line-height: 1.25; }
+
+    .lead {
+      color: var(--muted);
+      font-size: 17px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 22px;
+    }
+
+    .hero-art {
+      min-height: 310px;
+      border-radius: 24px;
+      background: linear-gradient(145deg, #dce9dd, #adc9b4, #47785b);
+      display: grid;
+      place-items: center;
+      padding: 25px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .house {
+      width: 75%;
+      max-width: 330px;
+      height: 155px;
+      background: #f7f3e8;
+      position: relative;
+      margin-top: 60px;
+      border-radius: 6px;
+      box-shadow: 0 15px 30px #183c2533;
+    }
+
+    .roof {
+      position: absolute;
+      left: -10%;
+      top: -75px;
+      width: 120%;
+      height: 90px;
+      background: #315b43;
+      clip-path: polygon(50% 0, 100% 100%, 0 100%);
+    }
+
+    .window {
+      position: absolute;
+      top: 35px;
+      width: 42px;
+      height: 48px;
+      background: #a8d2d5;
+      border: 5px solid white;
+    }
+
+    .window.left { left: 18%; }
+    .window.right { right: 18%; }
+
+    .door {
+      position: absolute;
+      bottom: 0;
+      left: 43%;
+      width: 18%;
+      height: 75px;
+      background: #a77c52;
+    }
+
+    .section { padding: 40px 0 50px; }
+
+    .section-head { margin-bottom: 22px; }
+
+    .sub { color: var(--muted); }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    .room-art {
+      min-height: 125px;
+      display: grid;
+      place-items: center;
+      background: #e1ece0;
+      color: var(--green);
+      font-size: 45px;
+    }
+
+    .room-art.gold { background: #f3e8d7; color: #8c6940; }
+    .room-art.blue { background: #e3e8ed; color: #4f718a; }
+
+    .card-body { padding: 18px; }
+
+    .card-body h3 { margin-top: 0; }
+
+    .price {
+      border-top: 1px solid var(--border);
+      margin-top: 16px;
+      padding-top: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .price strong { color: var(--green); }
+
+    .booking {
+      background: var(--dark-green);
+      color: white;
+      padding: 42px 0;
+    }
+
+    .booking .eyebrow { color: #f2d58d; }
+    .booking .sub { color: #d0dfd4; }
+
+    .booking-grid {
+      display: grid;
+      grid-template-columns: .85fr 1.15fr;
+      gap: 30px;
+      align-items: start;
+    }
+
+    .benefits {
+      display: grid;
+      gap: 18px;
+      margin-top: 24px;
+    }
+
+    .benefit {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+
+    .benefit-icon {
+      min-width: 38px;
+      height: 38px;
+      display: grid;
+      place-items: center;
+      border-radius: 10px;
+      background: #ffffff1a;
+    }
+
+    .benefit strong { display: block; }
+    .benefit span { color: #d0dfd4; font-size: 14px; }
+
+    .formbox {
+      background: white;
+      color: var(--text);
+      padding: 22px;
+      border-radius: 18px;
+    }
+
+    .formbox h3 { margin-top: 0; }
+
+    .hint {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .fields {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .field.full { grid-column: 1 / -1; }
+
+    label {
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 11px;
+      border: 1px solid #d8e1da;
+      border-radius: 9px;
+      background: white;
+      color: #17251f;
+      font: inherit;
+      font-size: 14px;
+    }
+
+    textarea { min-height: 80px; resize: vertical; }
+
+    .formbox button { width: 100%; margin-top: 16px; }
+
+    .form-note {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 12px;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .info {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      padding: 20px;
+    }
+
+    .info h3 { margin-top: 0; }
+    .info p { color: var(--muted); }
+
+    .contact-link {
+      color: var(--green);
+      font-weight: 700;
+      overflow-wrap: anywhere;
+    }
+
+    footer {
+      padding: 24px 0;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .foot {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 10;
+      padding: 18px;
+      background: #06150dcc;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal.show { display: flex; }
+
+    .modalbox {
+      width: 100%;
+      max-width: 540px;
+      background: white;
+      color: var(--text);
+      border-radius: 18px;
+      padding: 23px;
+    }
+
+    #resultText {
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+      color: #46564b;
+      font-size: 14px;
+    }
+
+    .modal-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    @media (max-width: 800px) {
+      .navlinks { display: none; }
+      .hero-grid, .booking-grid { grid-template-columns: 1fr; }
+      .cards { grid-template-columns: 1fr; }
+      .info-grid { grid-template-columns: 1fr; }
+      .hero-art { min-height: 270px; }
+    }
+
+    @media (max-width: 480px) {
+      .fields { grid-template-columns: 1fr; }
+      .field.full { grid-column: auto; }
+      .brand { font-size: 13px; }
+      .nav > .btn { padding: 10px; }
+      h1 { font-size: 36px; }
+    }
+  </style>
 </head>
+
 <body>
-<header><div class="brand">⌂ Эрдэнэт Хоногийн Байр Түрээс</div><a class="btn" href="#booking">Захиалга өгөх</a></header>
-<main>
-<section class="hero"><div><p>ЭРДЭНЭТ ХОТ · ХОНОГИЙН ТҮРЭЭС</p><h1>Эрдэнэтэд тухтай байрлах таны сонголт.</h1><p>Аялал, ажил хэрэг, гэр бүлийн айлчлалд тохирсон хоногийн байр. Байраа сонгон, хүссэн өдрөө захиалгын хүсэлтээ илгээгээрэй.</p><a class="btn" href="#rooms">Байрнууд үзэх →</a></div><div class="heroart">⌂ 🏡</div></section>
-<section id="rooms"><h2>Байрны сонголт</h2><p>Үнэ болон бодит зураг удахгүй нэмэгдэнэ.</p><div class="cards">
-<article class="card"><div class="room">⌂</div><div class="cardbody"><h3>1 өрөө байр</h3><p>Ганцаараа эсвэл хосоороо тухтай байрлахад тохиромжтой.</p><p class="price">Үнийг лавлах</p><a class="btn choose" href="#booking" data-room="1 өрөө байр">Сонгох</a></div></article>
-<article class="card"><div class="room">🏠</div><div class="cardbody"><h3>2 өрөө байр</h3><p>Гэр бүл, найз нөхөд болон ажлын томилолтод тохиромжтой.</p><p class="price">Үнийг лавлах</p><a class="btn choose" href="#booking" data-room="2 өрөө байр">Сонгох</a></div></article>
-<article class="card"><div class="room">🏡</div><div class="cardbody"><h3>Бусад сонголт</h3><p>Таны хэрэгцээнд тохирох байр байгаа эсэхийг лавлаарай.</p><p class="price">Үнийг лавлах</p><a class="btn choose" href="#booking" data-room="Бусад сонголт">Сонгох</a></div></article>
-</div></section>
-<section class="booking" id="booking"><h2>Захиалгын хүсэлт</h2><p>Мэдээллээ бөглөөд хүсэлтийн хураангуй гаргана.</p><form id="bookingForm"><div class="fields">
-<div><label for="roomType">Байрны төрөл</label><select id="roomType" required><option value="">Сонгох</option><option>1 өрөө байр</option><option>2 өрөө байр</option><option>Бусад сонголт</option></select></div>
-<div><label for="guests">Хүний тоо</label><select id="guests"><option>1</option><option selected>2</option><option>3</option><option>4</option><option>5 ба түүнээс дээш</option></select></div>
-<div><label for="arrival">Ирэх өдөр</label><input id="arrival" type="date" required></div>
-<div><label for="departure">Гарах өдөр</label><input id="departure" type="date" required></div>
-<div class="full"><label for="phone">Утасны дугаар</label><input id="phone" type="tel" placeholder="Утасны дугаараа оруулна уу" required></div>
-<div class="full"><label for="note">Нэмэлт хүсэлт</label><textarea id="note" placeholder="Ирэх цаг, бусад хүсэлт"></textarea></div>
-</div><button class="btn" type="submit">Хүсэлтийн хураангуй гаргах</button><p class="notice">Энэ эхний хувилбар хүсэлтийн хураангуй үүсгэнэ. Захиалгыг эзэн рүү илгээх холболт дараа нь хийгдэнэ.</p></form></section>
-<section><h2>Байршил ба холбоо барих</h2><p>📍 Эрдэнэт хот, Орхон аймаг — нарийвчилсан хаяг нэмэгдэнэ.</p><p>☎ Утасны дугаар болон Facebook Page-ийн холбоос нэмэгдэнэ.</p></section>
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="#top">
+      <span class="logo">⌂</span>
+      <span>Эрдэнэт Хоногийн Байр Түрээс</span>
+    </a>
+
+    <nav class="navlinks">
+      <a href="#rooms">Байрны үнэ</a>
+      <a href="#booking">Захиалга</a>
+      <a href="#location">Холбоо барих</a>
+    </nav>
+
+    <a class="btn primary" href="#booking">Захиалах</a>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <div class="eyebrow">ЭРДЭНЭТ ХОТ · ХОНОГИЙН ТҮРЭЭС</div>
+        <h1>Эрдэнэтэд тухтай байрлах таны сонголт.</h1>
+
+        <p class="lead">
+          Ажил хэрэг, аялал, гэр бүлийн айлчлалд зориулсан
+          хоногийн байр. Байрны төрлөө сонгон захиалгын
+          хүсэлтээ гаргаарай.
+        </p>
+
+        <p><strong>1 өрөө байр — 120,000 ₮ / хоног</strong></p>
+        <p><strong>2 өрөө байр — 150,000 ₮ / хоног</strong></p>
+
+        <div class="hero-actions">
+          <a class="btn primary" href="#booking">Захиалгын хүсэлт гаргах →</a>
+          <a class="btn secondary" href="#rooms">Байрны сонголт</a>
+        </div>
+
+        <p class="sub">
+          Орох цаг: 16:00 · Гарах цаг: 14:00 ·
+          Урьдчилгаа: 30,000 ₮
+        </p>
+      </div>
+
+      <div class="hero-art" role="img" aria-label="Байрны загвар зураг">
+        <div class="house">
+          <div class="roof"></div>
+          <div class="window left"></div>
+          <div class="window right"></div>
+          <div class="door"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="rooms">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="eyebrow">БАЙРНЫ СОНГОЛТ</div>
+        <h2>Өөрт тохирох байраа сонгоорой</h2>
+        <p class="sub">
+          Үнэ нь нэг хоногийн төлбөр болно.
+          Байр сул эсэхийг утсаар лавлаж баталгаажуулна уу.
+        </p>
+      </div>
+
+      <div class="cards">
+        <article class="card">
+          <div class="room-art">⌂</div>
+          <div class="card-body">
+            <h3>1 өрөө байр</h3>
+            <p>Ганцаараа эсвэл хосоороо байрлахад тохиромжтой.</p>
+            <div class="price">
+              <strong>120,000 ₮ / хоног</strong>
+              <a class="btn secondary" href="#booking" data-room="1 өрөө байр">Сонгох</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="room-art gold">⌂</div>
+          <div class="card-body">
+            <h3>2 өрөө байр</h3>
+            <p>Гэр бүл, найз нөхөд болон томилолтоор ирсэн хүмүүст.</p>
+            <div class="price">
+              <strong>150,000 ₮ / хоног</strong>
+              <a class="btn secondary" href="#booking" data-room="2 өрөө байр">Сонгох</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="room-art blue">☎</div>
+          <div class="card-body">
+            <h3>Бусад сонголт</h3>
+            <p>Өөр төрлийн байрны боломжийг утсаар лавлана уу.</p>
+            <div class="price">
+              <strong>Үнэ лавлах</strong>
+              <a class="btn secondary" href="tel:95654170">Залгах</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="booking" id="booking">
+    <div class="wrap booking-grid">
+      <div>
+        <div class="eyebrow">ЗАХИАЛГЫН НӨХЦӨЛ</div>
+        <h2>Захиалгаа урьдчилан төлөвлөөрэй.</h2>
+        <p class="sub">
+          Хүсэлтээ бөглөсний дараа 95654170 дугаарт холбогдож,
+          байрны сул эсэх болон захиалгаа баталгаажуулна уу.
+        </p>
+
+        <div class="benefits">
+          <div class="benefit">
+            <div class="benefit-icon">📅</div>
+            <div>
+              <strong>Орох цаг — 16:00</strong>
+              <span>Захиалсан өдрийн 16:00 цагаас байрлана.</span>
+            </div>
+          </div>
+
+          <div class="benefit">
+            <div class="benefit-icon">🕑</div>
+            <div>
+              <strong>Гарах цаг — 14:00</strong>
+              <span>
+                Гарах өдрийн 14:00 цагт байрыг суллаж өгнө.
+                Жишээ: 10-р сарын 16-нд 16:00-д орж,
+                10-р сарын 17-нд 14:00-д гарна.
+              </span>
+            </div>
+          </div>
+
+          <div class="benefit">
+            <div class="benefit-icon">💳</div>
+            <div>
+              <strong>Урьдчилгаа — 30,000 ₮</strong>
+              <span>
+                Захиалга 30,000 ₮ урьдчилгаа төлсний дараа
+                баталгаажна. Захиалагч өөрийн шалтгаанаар
+                цуцалсан тохиолдолд урьдчилгаа буцаан олгогдохгүй.
+              </span>
+            </div>
+          </div>
+
+          <div class="benefit">
+            <div class="benefit-icon">⏰</div>
+            <div>
+              <strong>Хоног сунгах</strong>
+              <span>
+                Хоног сунгах бол 12:00 цагаас өмнө тооцоогоо
+                хийж, сунгалтаа урьдчилан баталгаажуулна.
+              </span>
+            </div>
+          </div>
+
+          <div class="benefit">
+            <div class="benefit-icon">☎</div>
+            <div>
+              <strong>Холбоо барих</strong>
+              <span>95654170 дугаарт залгаж лавлана уу.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <form class="formbox" id="bookingForm">
+        <h3>Захиалгын хүсэлт</h3>
+        <p class="hint">
+          Мэдээллээ бөглөж, захиалгын хураангуйгаа үүсгээрэй.
+        </p>
+
+        <div class="fields">
+          <div class="field">
+            <label for="room">Байрны төрөл</label>
+            <select id="room" required>
+              <option value="">Сонгоно уу</option>
+              <option value="1 өрөө байр">1 өрөө байр</option>
+              <option value="2 өрөө байр">2 өрөө байр</option>
+              <option value="Бусад сонголт">Бусад сонголт</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="guests">Хүний тоо</label>
+            <select id="guests" required>
+              <option value="1">1 хүн</option>
+              <option value="2" selected>2 хүн</option>
+              <option value="3">3 хүн</option>
+              <option value="4">4 хүн</option>
+              <option value="5 ба түүнээс дээш">5 ба түүнээс дээш</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="checkin">Орох өдөр</label>
+            <input type="date" id="checkin" required>
+          </div>
+
+          <div class="field">
+            <label for="checkout">Гарах өдөр</label>
+            <input type="date" id="checkout" required>
+          </div>
+
+          <div class="field full">
+            <label for="phone">Таны утасны дугаар</label>
+            <input
+              type="tel"
+              id="phone"
+              placeholder="Утасны дугаараа оруулна уу"
+              required
+            >
+          </div>
+
+          <div class="field full">
+            <label for="note">Нэмэлт хүсэлт (заавал биш)</label>
+            <textarea
+              id="note"
+              placeholder="Нэмэлт асуулт, хүсэлт..."
+            ></textarea>
+          </div>
+        </div>
+
+        <button class="btn primary" type="submit">
+          Үнийн тооцоо, хүсэлтийн хураангуй гаргах →
+        </button>
+
+        <p class="form-note">
+          Энэ маягт нь хүсэлтийн хураангуй үүсгэнэ.
+          Онлайн төлбөр хийх болон хүсэлтийг автоматаар
+          илгээх үйлчилгээ холбогдоогүй тул утсаар
+          эсвэл Facebook-ээр захиалгаа баталгаажуулна уу.
+        </p>
+      </form>
+    </div>
+  </section>
+
+  <section class="section" id="location">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="eyebrow">БАЙРШИЛ БА ХОЛБОО</div>
+        <h2>Эрдэнэт хотын хоногийн байр түрээс</h2>
+        <p class="sub">
+          Байрны яг хаяг болон сул эсэхийг захиалахаас өмнө лавлана уу.
+        </p>
+      </div>
+
+      <div class="info-grid">
+        <div class="info">
+          <h3>📍 Байршил</h3>
+          <p>
+            Эрдэнэт хот, Орхон аймаг.<br>
+            Байрны дэлгэрэнгүй хаягийг утсаар лавлана уу.
+          </p>
+        </div>
+
+        <div class="info">
+          <h3>☎ Холбоо барих</h3>
+          <p>
+            Утас:
+            <a class="contact-link" href="tel:95654170">95654170</a>
+            <br><br>
+            Facebook:
+            <a
+              class="contact-link"
+              href="https://www.facebook.com/profile.php?id=61593685004760"
+              target="_blank"
+              rel="noopener noreferrer"
+            >Хуудсыг нээх ↗</a>
+          </p>
+
+          <a
+            class="btn primary"
+            href="https://www.facebook.com/profile.php?id=61593685004760"
+            target="_blank"
+            rel="noopener noreferrer"
+          >Facebook-ээр холбогдох</a>
+        </div>
+      </div>
+    </div>
+  </section>
 </main>
-<footer>© Эрдэнэт Хоногийн Байр Түрээс · Эрдэнэт хот</footer>
+
+<footer>
+  <div class="wrap foot">
+    <span>© <span id="year"></span> Эрдэнэт Хоногийн Байр Түрээс</span>
+    <span>Эрдэнэт хот · Хоногийн байр түрээс</span>
+  </div>
+</footer>
+
+<div
+  class="modal"
+  id="resultModal"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="resultTitle"
+>
+  <div class="modalbox">
+    <h3 id="resultTitle">Захиалгын хураангуй</h3>
+    <p id="resultText"></p>
+
+    <div class="modal-actions">
+      <button class="btn primary" id="copyBtn" type="button">
+        Хураангуй хуулах
+      </button>
+      <button class="btn secondary" id="closeBtn" type="button">
+        Хаах
+      </button>
+    </div>
+  </div>
+</div>
+
 <script>
-const $=id=>document.getElementById(id);
-const today=new Date();
-const dateStr=d=>{const x=new Date(d.getTime()-d.getTimezoneOffset()*60000);return x.toISOString().slice(0,10)};
-$('arrival').min=dateStr(today);$('departure').min=dateStr(today);
-$('arrival').addEventListener('change',()=>{$('departure').min=$('arrival').value;if($('departure').value<=$('arrival').value)$('departure').value=''});
-document.querySelectorAll('[data-room]').forEach(a=>a.addEventListener('click',()=>{$('roomType').value=a.dataset.room}));
-$('bookingForm').addEventListener('submit',e=>{e.preventDefault();const a=new Date($('arrival').value+'T12:00:00');const d=new Date($('departure').value+'T12:00:00');if(d<=a){alert('Гарах өдөр ирэх өдрөөс хойш байх ёстой.');return}const nights=Math.round((d-a)/86400000);const msg='Эрдэнэт Хоногийн Байр Түрээс — захиалгын хүсэлт\nБайр: '+$('roomType').value+'\nХүний тоо: '+$('guests').value+'\nИрэх: '+$('arrival').value+'\nГарах: '+$('departure').value+'\nХоног: '+nights+'\nУтас: '+$('phone').value+'\nНэмэлт хүсэлт: '+($('note').value||'Байхгүй')+'\n\nБайр сул эсэх, үнэ болон захиалгыг эзэнтэй холбогдон баталгаажуулна.';if(confirm(msg+'\n\nХураангуйг хуулж авах уу?')){if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(msg).then(()=>alert('Хураангуй хуулагдлаа.')).catch(()=>prompt('Хураангуйг гараар хуулна уу:',msg));else prompt('Хураангуйг гараар хуулна уу:',msg)}});
+  const $ = id => document.getElementById(id);
+
+  $("year").textContent = new Date().getFullYear();
+
+  const localDate = date => {
+    const adjusted = new Date(
+      date.getTime() - date.getTimezoneOffset() * 60000
+    );
+    return adjusted.toISOString().slice(0, 10);
+  };
+
+  const today = localDate(new Date());
+
+  $("checkin").min = today;
+  $("checkout").min = today;
+
+  $("checkin").addEventListener("change", () => {
+    const checkin = $("checkin").value;
+    $("checkout").min = checkin || today;
+
+    if ($("checkout").value && $("checkout").value <= checkin) {
+      $("checkout").value = "";
+    }
+  });
+
+  document.querySelectorAll("[data-room]").forEach(link => {
+    link.addEventListener("click", () => {
+      $("room").value = link.dataset.room;
+    });
+  });
+
+  let summary = "";
+
+  $("bookingForm").addEventListener("submit", event => {
+    event.preventDefault();
+
+    const checkinValue = $("checkin").value;
+    const checkoutValue = $("checkout").value;
+
+    if (!checkinValue || !checkoutValue) {
+      alert("Орох болон гарах өдрөө сонгоно уу.");
+      return;
+    }
+
+    const start = new Date(checkinValue + "T12:00:00");
+    const end = new Date(checkoutValue + "T12:00:00");
+
+    if (end <= start) {
+      alert("Гарах өдөр орох өдрөөс хойш байх ёстой.");
+      return;
+    }
+
+    const nights = Math.round((end - start) / 86400000);
+    const room = $("room").value;
+
+    let nightlyPrice = null;
+
+    if (room === "1 өрөө байр") nightlyPrice = 120000;
+    if (room === "2 өрөө байр") nightlyPrice = 150000;
+
+    const money = amount =>
+      amount.toLocaleString("en-US") + " ₮";
+
+    const total = nightlyPrice === null
+      ? "Утсаар лавлана"
+      : money(nightlyPrice * nights);
+
+    summary =
+`ЭРДЭНЭТ ХОНОГИЙН БАЙР ТҮРЭЭС
+ЗАХИАЛГЫН ХҮСЭЛТ
+
+Байрны төрөл: ${room}
+Хүний тоо: ${$("guests").value}
+Орох өдөр, цаг: ${checkinValue} 16:00
+Гарах өдөр, цаг: ${checkoutValue} 14:00
+Хоногийн тоо: ${nights}
+Хоногийн үнэ: ${nightlyPrice === null ? "Утсаар лавлана" : money(nightlyPrice)}
+Урьдчилсан нийт үнэ: ${total}
+Захиалгын урьдчилгаа: 30,000 ₮
+
+Захиалагчийн утас: ${$("phone").value}
+Нэмэлт хүсэлт: ${$("note").value || "Байхгүй"}
+
+ЗАХИАЛГЫН НӨХЦӨЛ
+• Орох цаг: захиалсан өдрийн 16:00.
+• Гарах цаг: гарах өдрийн 14:00.
+• Захиалга 30,000 ₮ урьдчилгаа төлсний дараа баталгаажна.
+• Захиалагч өөрийн шалтгаанаар цуцалсан тохиолдолд урьдчилгаа буцаан олгогдохгүй.
+• Хоног сунгахдаа 12:00 цагаас өмнө тооцоо хийж, сунгалтаа баталгаажуулна.
+• Байр сул эсэх болон захиалгыг утсаар баталгаажуулна.
+
+Холбоо барих: 95654170
+Facebook: https://www.facebook.com/profile.php?id=61593685004760`;
+
+    $("resultText").textContent = summary;
+    $("copyBtn").textContent = "Хураангуй хуулах";
+    $("resultModal").classList.add("show");
+  });
+
+  $("closeBtn").addEventListener("click", () => {
+    $("resultModal").classList.remove("show");
+  });
+
+  $("resultModal").addEventListener("click", event => {
+    if (event.target === $("resultModal")) {
+      $("resultModal").classList.remove("show");
+    }
+  });
+
+  $("copyBtn").addEventListener("click", async () => {
+    try {
+      await navigator.clipboard.writeText(summary);
+      $("copyBtn").textContent = "Хуулагдлаа ✓";
+    } catch (error) {
+      const textArea = document.createElement("textarea");
+      textArea.value = summary;
+      document.body.appendChild(textArea);
+      textArea.select();
+
+      try {
+        document.execCommand("copy");
+        $("copyBtn").textContent = "Хуулагдлаа ✓";
+      } catch (copyError) {
+        alert("Хураангуйг сонгон гараар хуулна уу.");
+      }
+
+      textArea.remove();
+    }
+  });
 </script>
 </body>
 </html>
